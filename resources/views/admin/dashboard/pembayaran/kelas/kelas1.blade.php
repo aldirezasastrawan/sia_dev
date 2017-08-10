@@ -46,7 +46,24 @@
 	                	<div class="box-body">
 	                		<h3 class="box-title">Pembayaran Siswa </h3>
 						</div>
-			                  		<div class="tab-content">
+                        <br>
+                            <div class="box-header">                  
+			                      <form class="form-horizontal">
+				                      <div class="form-group">
+				                          <label class="col-md-4 control-label"> Pilihan Jenis Pembayaran  <i class="fa  fa-hand-o-right"></i> </label>
+				                          <div class="col-md-4 ">
+				                              <select class="form-control" name="jenis_pembayaran" required="">
+				                                  <option value=""> ----- Pilih Jenis Pembayaran -----</option>
+			                                      <option class="daftar_ulang" value="Daftar Ulang">Daftar Ulang</option>
+			                                      <option class="spp" value="SPP">SPP</option>
+				                              </select>
+				                              <small class="help-block"></small>
+				                          </div>
+				                      </div>
+			                      </form>
+			                </div><!-- /.box-header -->
+
+				                  		<div class="tab-content">
 		                        <div id="panel_tab2_example1" class="tab-pane active">
 		                            <form action="{{URL:: to('/pembayaranadmin/tambah/simpanpembayarankelas')}}" method="post">
 		                            	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
@@ -58,7 +75,6 @@
 		                                            <th>Nama Siswa</th>
 		                                            <th>Kelas</th>
 		                                            <th>Tahun Ajaran</th>
-		                                            <th> Jenis Pembayaran</th>
 		                                            <th> Jumlah Pembayaran</th>
 		                                            <th> Keterangan</th>
 		                                        </tr>
@@ -80,24 +96,17 @@
 		                                            	<input type="hidden" name="nilai-{{ $data->id }}[tahun_ajaran]" value="{{$data->id}}" readonly="">
 		                                            </td>
 		                                            <td>
-							                           <select name="{{$data->id}}[jenis_pembayaran]" class="form-control" required>
-							                                  <option value=""> ----- Pilih Jenis Pembayaran -----</option>
-						                                      <option class="daftar_ulang" value="Daftar Ulang">Daftar Ulang</option>
-						                                      <option class="spp" value="SPP">SPP</option>
-							                            </select>
-		                                            </td>
-		                                            <td>
-		                                            	<select name="{{$data->id}}[jumlah_pembayaran]" class="form-control" required="" >
+		                                            	<select name="jumlah_pembayaran" class="form-control" required="" >
 						                                		<option value=""> ----- Pilih Jumlah Pembayaran -----</option>
 						                                      	<option class="spp" value="Rp. 300.000,-">Rp. 300.000,-</option>
 						                                      	<option class="daftar_ulang" value="Rp. 1.250.000,-">Rp. 1.250.000,-</option>
 						                                </select>
 		                                            </td>
 		                                            <td>
-		                                            	<select name="{{$data->id}}[keterangan]" class="form-control" required>
+		                                            	<select name="keterangan" class="form-control" required>
 						                      				<option value=""> ----- Pilih Keterangan -----</option>
 						                                    <option value="Lunas">Lunas</option>
-						                                    <option value="Belum Lunas">Belum Bayar</option>
+						                                    <option value="Belum Lunas" selected="">Belum Bayar</option>
 						                                </select>
 		                                            </td>
 		                                        </tr>
@@ -120,18 +129,18 @@
 <script>
 
 	$("select[name='jenis_pembayaran']").on('change', function() {
-	  // utk ambil $data->id tanpa php
-	  var jn_name = $(this).attr('name').split('-');
-	  var id = jn_name[1].split('[')[0];
+	  // // utk ambil $data->id tanpa php
+	  // var jn_name = $(this).attr('name').split('-');
+	  // var id = jn_name[1].split('[')[0];
 
       var selected_option = $(this).find('option:selected').attr('class');
       $("select[name='jumlah_pembayaran']").find('.' + selected_option).attr('selected', 'selected');
     });
 
     $("select[name='jumlah_pembayaran']").on('change', function() {
-      // utk ambil $data->id tanpa php
-	  var jn_name = $(this).attr('name').split('-');
-	  var id = jn_name[1].split('[')[0];
+   //    // utk ambil $data->id tanpa php
+	  // var jn_name = $(this).attr('name').split('-');
+	  // var id = jn_name[1].split('[')[0];
 
       var selected_option = $(this).find('option:selected').attr('class');
       $("select[name='jenis_pembayaran']").find('.' + selected_option).attr('selected', 'selected');
